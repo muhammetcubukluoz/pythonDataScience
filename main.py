@@ -124,6 +124,73 @@ def aggregate_function(cursor):
     result = cursor.fetchall()  # fetchall
     print(result)
 
+def query(cursor):
+
+    print("------****------")
+    cursor.execute('SELECT * FROM Courses')
+    result = cursor.fetchall()
+    print(result)
+
+    print("------****------")
+    cursor.execute('SELECT course_name, instructor FROM Courses')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT name,age FROM Students WHERE age = 21')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT name,city FROM Students WHERE city = "Chicago"')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT course_name, instructor FROM Courses WHERE instructor = "Dr. Anderson"')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT name FROM Students WHERE name LIKE  "A%" ')
+    result = cursor.fetchone()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT course_name, credits FROM Courses WHERE credits >= 3')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT * FROM Students ORDER BY name')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT * FROM Students WHERE age >20 ORDER BY name')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT * FROM Students WHERE city="New York" or city="Chicago"')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    print("------****------")
+    cursor.execute('SELECT * FROM Students WHERE city != "New York"')
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
 
 def main():
     conn, cursor = create_database()
@@ -134,6 +201,7 @@ def main():
         basic_sql_operations(cursor)
         update_delete_insert_operations(conn,cursor)
         aggregate_function(cursor)
+        query(cursor)
         conn.commit()
 
     except sqlite3.Error as e:
